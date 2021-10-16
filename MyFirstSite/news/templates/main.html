@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Главная страница</title>
+</head>
+<body>
+{% if request.user.is_authenticated %}
+	<h3>Добро пожаловать на сайт, {{ request.user.first_name }}</h3>
+<h3>Ссылка на выход их учетной записи</h3> <a href="{% url 'another_logout' %}">Выйти</a>
+{% else %}
+	<h3>Вы неавторизированны нанашем сайте.</h3>
+	<a href="{% url 'another_login' %}">Войти</a>
+{% endif %}
+<h2>я - главная страница</h2>
+<a href="{% url 'news' %}">Перейти на страницу с объявлениями</a>
+</body>
+</html>

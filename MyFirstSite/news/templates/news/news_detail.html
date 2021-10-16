@@ -1,0 +1,34 @@
+<html>
+	<h1></h1>
+			{{news.title}}
+			<p>
+				Описание: {{news.content}}
+			</p>
+			<p>
+				Дата: {{news.date}}
+			</p>
+			<p>
+				Комментарии:
+				{% for comment in comments %}
+					{% if news.id == comment.news_id %}
+						{% if comment.user %}
+							<p>{{ comment }} - <a href="/users/{{ comment.user.id }}"> {{ comment.user_name }}</a></p>
+						{% else %}
+							<p>{{ comment }} - {{ comment.user_name }}(аноним)</p>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+			</p>
+<body>
+	<h2>Написать комментарий</h2>
+	<form method="post" action="/news/{{ object.id }}/add_comment/">
+		{% csrf_token %}
+		{% if request.user.is_authenticated %}
+			{{ comment_form_authenticated.as_p }}
+		{% else %}
+			{{ comment_form.as_p }}
+		{% endif %}
+		<button type="submit">Опубликовать</button>
+	</form>
+</body>
+</html>

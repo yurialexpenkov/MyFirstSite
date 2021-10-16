@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Создание новости</title>
+</head>
+<body>
+	<h2>Написать комментарий</h2>
+	<form method="post" action="/news/{{ profile_id }}/add_comment/">
+		{% csrf_token %}
+		{{ comment_form.as_p }}
+		<button type="submit">Опубликовать</button>
+	</form>
+</body>
+</html>

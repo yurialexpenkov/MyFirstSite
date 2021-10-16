@@ -1,0 +1,32 @@
+<html>
+<h1>Новости</h1>
+{% if news_list %}
+<ul>
+
+    {% for news in news_list %}
+        {% if news.status_verifications == 'a' %}
+        <li>
+            <a href="{{ news.id }}/">{{ news.title }}</a>, дата создания - {{ news.date }}---- {% if perm %} <a href="/news/{{ news.id }}/edit/">Редактировать новость</a> {% endif %}
+        </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% else %}
+<p>Новостей нет</p>
+{% endif %}
+{% if perm %}
+    <a href="/news/create">Добавить новую новость</a>
+{% endif %}
+
+
+ <body>
+    <form name="search" method="post" action="response_to_search/">{% csrf_token %}
+    <p><b>Поиск объявления:</b><br>
+    <input name="search" type="text" size="40">
+    <p><input type="submit" value="Отправить">
+    <input type="reset" value="Очистить"></p>
+    </form>
+</body>
+
+
+</html>

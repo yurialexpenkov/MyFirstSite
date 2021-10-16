@@ -1,0 +1,9 @@
+<html>
+<ul>
+    <li>
+        {% for news in news_list %}
+            <a href="/news/{{ news.id }}">{{ news.title }}</a>, дата создания - {{ news.date }}---- {% if perm %} <a href="/news/{{ news.id }}/edit/">Редактировать новость</a> {% endif %}
+        {% endfor %}
+    </li>
+</ul>
+</html>
